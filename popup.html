@@ -7,7 +7,33 @@
     <div class="container">
         <h3>No More Spoilers!</h3>
         <input type="text" placeholder="Enter Spoiler Keyword here..."/>
+        <a href="add.html">Add spoiler keywords...</a>
         <button id="changeColor"></button>
+
+        <div class="power-switch">
+            <input type="checkbox" />
+            <div class="button">
+              <svg class="power-off">
+                <use xlink:href="#line" class="line" />
+                <use xlink:href="#circle" class="circle" />
+              </svg>
+              <svg class="power-on">
+                <use xlink:href="#line" class="line" />
+                <use xlink:href="#circle" class="circle" />
+              </svg>
+            </div>
+          </div>
+          
+          <!-- SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="line">
+              <line x1="75" y1="34" x2="75" y2="58"/>
+            </symbol>
+            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="circle">
+              <circle cx="75" cy="80" r="35"/>
+            </symbol>
+          </svg>
+        
     </div>
     <script src="popup.js"></script>
   </body>
