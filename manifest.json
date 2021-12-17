@@ -2,5 +2,8 @@
   "name": "No More Spoilers",
   "description": "A Chrome Extension that can hide all the spoilers in a website for your upcoming movie/TV-series in your watch-list!",
   "version": "1.0",
-  "manifest_version": 3
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  }
 }
