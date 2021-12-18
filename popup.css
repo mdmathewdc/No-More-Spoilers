@@ -54,3 +54,8 @@ h3 {
   transform: translateY(4px);
   box-shadow: none;
 }
+
+.button:disabled {
+  background: grey;
+  box-shadow: 0 5px 0px grey;
+}
