@@ -27,7 +27,7 @@ changeColor.addEventListener("click", async () => {
 
   // Remove disabled property from 'Add' button when text input box is not empty
   inputBox.addEventListener("input", () => {
-		
+
       if (  inputBox.value &&                   // if it exist AND
             inputBox.value.length > 0 &&        // if value have one charecter at least
             inputBox.value.trim().length > 0)   // if value is not just spaces
@@ -41,6 +41,12 @@ changeColor.addEventListener("click", async () => {
 
 	// Add button click handler
 	addButton.addEventListener("click", () => {
+		// Disable the button
+		addButton.disabled = true;
+		
+		// Empty the input box value
+		inputBox.value = "";
+
 
 
 	})
