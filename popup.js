@@ -2,6 +2,7 @@
 let changeColor = document.getElementById("changeColor");
 let inputBox = document.getElementById("textbox");
 let addButton = document.getElementById("add-button");
+var spoilerTerms = [];
 
 chrome.storage.sync.get("color", ({ color }) => {
   changeColor.style.backgroundColor = color;
@@ -43,6 +44,9 @@ changeColor.addEventListener("click", async () => {
 	addButton.addEventListener("click", () => {
 		// Disable the button
 		addButton.disabled = true;
+
+		// Get the new spoiler keyword and store it into the array
+		spoilerTerms.push(inputBox.value);
 		
 		// Empty the input box value
 		inputBox.value = "";
