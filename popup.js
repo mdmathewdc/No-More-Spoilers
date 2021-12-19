@@ -41,15 +41,18 @@ changeColor.addEventListener("click", async () => {
   });
 
 	// Add button click handler
-	addButton.addEventListener("click", () => {
+	addButton.addEventListener("click", async () => {
 		// Disable the button
 		addButton.disabled = true;
 
 		// Get the new spoiler keyword and store it into the array
 		spoilerTerms.push(inputBox.value);
+		await chrome.storage.sync.set({'spoilerArray': spoilerTerms});
 		
 		// Empty the input box value
 		inputBox.value = "";
+
+		alert(JSON.stringify(await chrome.storage.sync.get(['spoilerArray'])))
 
 
 
