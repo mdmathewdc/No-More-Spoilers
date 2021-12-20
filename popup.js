@@ -46,14 +46,15 @@ changeColor.addEventListener("click", async () => {
 		// Disable the button
 		addButton.disabled = true;
 
+		// Get the new spoiler term and push into the array
 		spoilerTerms.push(inputBox.value)
-		// Get the new spoiler keyword and store it into the array
+
+		// Replace with the new array
 		await chrome.storage.sync.set({'spoilerArray': spoilerTerms });
 		
 		// Empty the input box value
 		inputBox.value = "";
 
-		// alert(JSON.stringify(await chrome.storage.sync.get(['spoilerArray'])))
 		getSpoilerTerms()
 
 	})
@@ -74,9 +75,9 @@ changeColor.addEventListener("click", async () => {
 			// Nothing to change.
 			if (!result.spoilerArray)
 				return;
-
+			
+			// Initialize spoiletTerms with existing spoiler terms
 			spoilerTerms = result.spoilerArray;
-			// alert(JSON.stringify(terms))
 		});
 	}
 
