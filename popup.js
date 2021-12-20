@@ -42,18 +42,49 @@ changeColor.addEventListener("click", async () => {
 
 	// Add button click handler
 	addButton.addEventListener("click", async () => {
+		
 		// Disable the button
 		addButton.disabled = true;
 
+		spoilerTerms.push(inputBox.value)
 		// Get the new spoiler keyword and store it into the array
-		spoilerTerms.push(inputBox.value);
-		await chrome.storage.sync.set({'spoilerArray': spoilerTerms});
+		await chrome.storage.sync.set({'spoilerArray': spoilerTerms });
 		
 		// Empty the input box value
 		inputBox.value = "";
 
-		alert(JSON.stringify(await chrome.storage.sync.get(['spoilerArray'])))
-
-
+		// alert(JSON.stringify(await chrome.storage.sync.get(['spoilerArray'])))
+		getSpoilerTerms()
 
 	})
+
+	function getSpoilerTerms() {
+		chrome.storage.sync.get(['spoilerArray'], (result) => {
+				// Nothing to change.
+				if (!result.spoilerArray)
+					return;
+	
+				terms = result.spoilerArray;
+				alert(JSON.stringify(terms))
+			});
+	}
+
+	function main() {
+		chrome.storage.sync.get(['spoilerArray'], (result) => {
+			// Nothing to change.
+			if (!result.spoilerArray)
+				return;
+
+			spoilerTerms = result.spoilerArray;
+			// alert(JSON.stringify(terms))
+		});
+	}
+
+	function clearAll() {
+		chrome.storage.sync.set({'spoilerArray': []});
+	}
+
+	document.addEventListener('DOMContentLoaded', function () {
+		main();
+		// clearAll();
+	});
