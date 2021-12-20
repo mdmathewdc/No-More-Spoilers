@@ -2,10 +2,18 @@
 <html>
   <head>
     <link rel="stylesheet" href="popup.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   </head>
   <body>
+    <header>
+        <nav>
+            <a href="#">No More Spoilers!</a>
+        </nav>
+    </header>
+
     <div class="container">
-        <h3>No More Spoilers!</h3>
 
         <div class="button-container">
              <input type="text" id="textbox" placeholder="Enter Spoiler Keywords here to block..."/>
@@ -13,10 +21,14 @@
         </div>
 
         <div class="added-keywords-container">
-            
+
         </div>
 
-        <button id="changeColor">Change</button>
+        <div class="no-spoiler-terms-added">
+            <p>No Spoiler terms added!</p>
+        </div>
+
+        <!-- <button id="changeColor">Change</button> -->
     </div>
     <script src="popup.js"></script>
   </body>
