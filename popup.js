@@ -85,6 +85,12 @@ chrome.storage.sync.get("color", ({ color }) => {
 			// Initialize spoiletTerms with existing spoiler terms
 			spoilerTerms = result.spoilerArray;
 		});
+
+		// Populate HTML
+	}
+
+	function populateWithSpoilerTerms() {	//TODO
+
 	}
 
 	function clearAll() {
