@@ -70,6 +70,10 @@ chrome.storage.sync.get("color", ({ color }) => {
 			});
 	}
 
+	function deleteAllTerms() {
+		chrome.storage.sync.remove(['spoilerArray'])
+	}
+
 	function main() {
 		chrome.storage.sync.get(['spoilerArray'], (result) => {
 			// Nothing to change.
@@ -86,6 +90,7 @@ chrome.storage.sync.get("color", ({ color }) => {
 	}
 
 	document.addEventListener('DOMContentLoaded', function () {
-		main();
+		// main();
 		// clearAll();
+		deleteAllTerms();
 	});
