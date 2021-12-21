@@ -33,11 +33,11 @@ chrome.storage.sync.get("color", ({ color }) => {
             inputBox.value.length > 0 &&        // if value have one charecter at least
             inputBox.value.trim().length > 0)   // if value is not just spaces
           {
-						addButton.disabled = false;
+			addButton.disabled = false;
           }
-			else {
-						addButton.disabled = true;
-					 }
+	else  { 
+		    addButton.disabled = true;
+		  }
   });
 
 	// Add button click handler
@@ -67,6 +67,8 @@ chrome.storage.sync.get("color", ({ color }) => {
 	
 				terms = result.spoilerArray;
 				alert(JSON.stringify(terms))
+				let parsedArray = JSON.parse(JSON.stringify(terms))
+				alert(parsedArray.length)
 			});
 	}
 
@@ -90,7 +92,7 @@ chrome.storage.sync.get("color", ({ color }) => {
 	}
 
 	document.addEventListener('DOMContentLoaded', function () {
-		// main();
+		main();
 		// clearAll();
-		deleteAllTerms();
+		// deleteAllTerms();
 	});

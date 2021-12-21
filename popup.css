@@ -76,3 +76,7 @@ nav a {
   background: grey;
   box-shadow: 0 5px 0px grey;
 }
+
+.no-spoiler-terms-fallback {
+  display: block;
+}
