@@ -1,12 +1,13 @@
 // Initialize button with user's preferred color
 // let changeColor = document.getElementById("changeColor");
-let inputBox = document.getElementById("textbox");
-let addButton = document.getElementById("add-button");
-var spoilerTerms = [];
+let inputBox = document.getElementById("textbox")
+let addButton = document.getElementById("add-button")
+let deleteButton = document.getElementById("delete-button")
+var spoilerTerms = []
 
 chrome.storage.sync.get("color", ({ color }) => {
-  changeColor.style.backgroundColor = color;
-});
+  changeColor.style.backgroundColor = color
+})
 
 // When the button is clicked, inject setPageBackgroundColor into current page
 // changeColor.addEventListener("click", async () => {
@@ -26,79 +27,78 @@ chrome.storage.sync.get("color", ({ color }) => {
 //     });
 //   }
 
-  // Remove disabled property from 'Add' button when text input box is not empty
-  inputBox.addEventListener("input", () => {
+// Remove disabled property from 'Add' button when text input box is not empty
+inputBox.addEventListener("input", () => {
+	if (  inputBox.value &&                   // if it exist AND
+		  inputBox.value.length > 0 &&        // if value have one charecter at least
+		  inputBox.value.trim().length > 0)   // if value is not just spaces
+	{
+		addButton.disabled = false
+	}
+	else  
+	{ 
+		addButton.disabled = true
+	}
+})
 
-      if (  inputBox.value &&                   // if it exist AND
-            inputBox.value.length > 0 &&        // if value have one charecter at least
-            inputBox.value.trim().length > 0)   // if value is not just spaces
-          {
-			addButton.disabled = false;
-          }
-	else  { 
-		    addButton.disabled = true;
-		  }
-  });
+// Add button click handler
+addButton.addEventListener("click", async () => {
+	
+	// Disable the button
+	addButton.disabled = true
 
-	// Add button click handler
-	addButton.addEventListener("click", async () => {
+	// Get the new spoiler term and push into the array
+	spoilerTerms.push(inputBox.value)
+
+	// Replace with the new array
+	await chrome.storage.sync.set({'spoilerArray': spoilerTerms })
+	
+	// Empty the input box value
+	inputBox.value = ""
+
+	getSpoilerTerms()
+
+})
+
+function getSpoilerTerms() {
+	chrome.storage.sync.get(['spoilerArray'], (result) => {
+		// Nothing to change.
+		if (!result.spoilerArray)
+			return
+
+		terms = result.spoilerArray;
+		alert(JSON.stringify(terms))
+		let parsedArray = JSON.parse(JSON.stringify(terms))
+		// alert(parsedArray.length)
+		})
+}
+
+function main() {
+	chrome.storage.sync.get(['spoilerArray'], (result) => {
+		// Nothing to change.
+		if (!result.spoilerArray)
+			return
 		
-		// Disable the button
-		addButton.disabled = true;
-
-		// Get the new spoiler term and push into the array
-		spoilerTerms.push(inputBox.value)
-
-		// Replace with the new array
-		await chrome.storage.sync.set({'spoilerArray': spoilerTerms });
-		
-		// Empty the input box value
-		inputBox.value = "";
-
-		getSpoilerTerms()
-
+		// Initialize spoilerTerms with existing spoiler terms
+		spoilerTerms = result.spoilerArray;
 	})
 
-	function getSpoilerTerms() {
-		chrome.storage.sync.get(['spoilerArray'], (result) => {
-				// Nothing to change.
-				if (!result.spoilerArray)
-					return;
-	
-				terms = result.spoilerArray;
-				alert(JSON.stringify(terms))
-				let parsedArray = JSON.parse(JSON.stringify(terms))
-				alert(parsedArray.length)
-			});
-	}
+	// Populate HTML
+}
 
-	function deleteAllTerms() {
-		chrome.storage.sync.remove(['spoilerArray'])
-	}
+function populateWithSpoilerTerms() {	//TODO
 
-	function main() {
-		chrome.storage.sync.get(['spoilerArray'], (result) => {
-			// Nothing to change.
-			if (!result.spoilerArray)
-				return;
-			
-			// Initialize spoiletTerms with existing spoiler terms
-			spoilerTerms = result.spoilerArray;
-		});
+}
 
-		// Populate HTML
-	}
+deleteButton.addEventListener("click", () => {
+	clearAll()
+})
 
-	function populateWithSpoilerTerms() {	//TODO
+function clearAll() {
+	chrome.storage.sync.set({'spoilerArray': []});
+	spoilerTerms = []
+}
 
-	}
-
-	function clearAll() {
-		chrome.storage.sync.set({'spoilerArray': []});
-	}
-
-	document.addEventListener('DOMContentLoaded', function () {
-		main();
-		// clearAll();
-		// deleteAllTerms();
-	});
+document.addEventListener('DOMContentLoaded', function () {
+	main()
+})
