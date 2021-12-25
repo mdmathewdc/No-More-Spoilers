@@ -93,9 +93,19 @@ function populateWithSpoilerTerms() {
 	
 	// Populate the ul with spoiler terms list
 	spoilerTerms.forEach(item => {
-		
+
+		var listItem = document.createElement("li")
+
+		// and give it some content
+		const newContent = document.createTextNode(item);
+
+		// add the text node to the newly created div
+		listItem.appendChild(newContent);
+	  
+
 		document.getElementById("spoiler-terms-list")
-				.innerHTML = spoilerTerms
+				.appendChild(listItem)
+		// alert(listItem.innerHTML)
 		
 	})
 
