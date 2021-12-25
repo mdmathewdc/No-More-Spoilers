@@ -97,11 +97,10 @@ function populateWithSpoilerTerms() {
 		var listItem = document.createElement("li")
 
 		// and give it some content
-		const newContent = document.createTextNode(item);
+		const newContent = document.createTextNode(item)
 
 		// add the text node to the newly created div
-		listItem.appendChild(newContent);
-	  
+		listItem.appendChild(newContent)
 
 		document.getElementById("spoiler-terms-list")
 				.appendChild(listItem)
