@@ -4,6 +4,7 @@ let inputBox = document.getElementById("textbox")
 let addButton = document.getElementById("add-button")
 let deleteButton = document.getElementById("delete-button")
 var spoilerTerms = []
+var terms
 
 chrome.storage.sync.get("color", ({ color }) => {
   changeColor.style.backgroundColor = color
@@ -80,13 +81,23 @@ function main() {
 			return
 		
 		// Initialize spoilerTerms with existing spoiler terms
-		spoilerTerms = result.spoilerArray;
-	})
+		spoilerTerms = result.spoilerArray
 
-	// Populate HTML
+		// Populate HTML
+		populateWithSpoilerTerms()
+
+	})		
 }
 
-function populateWithSpoilerTerms() {	//TODO
+function populateWithSpoilerTerms() {
+	
+	// Populate the ul with spoiler terms list
+	spoilerTerms.forEach(item => {
+		
+		document.getElementById("spoiler-terms-list")
+				.innerHTML = spoilerTerms
+		
+	})
 
 }
 
@@ -95,7 +106,7 @@ deleteButton.addEventListener("click", () => {
 })
 
 function clearAll() {
-	chrome.storage.sync.set({'spoilerArray': []});
+	chrome.storage.sync.set({'spoilerArray': []})
 	spoilerTerms = []
 }
 
