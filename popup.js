@@ -75,34 +75,19 @@ function getSpoilerTerms() {
 		})
 }
 
-function main() {
-	chrome.storage.sync.get(['spoilerArray'], (result) => {
-		// Nothing to change.
-		if (!result.spoilerArray)
-			return
-		
-		// Initialize spoilerTerms with existing spoiler terms
-		spoilerTerms = result.spoilerArray
-
-		// Populate HTML
-		populateWithSpoilerTerms()
-
-	})		
-}
-
 function populateWithSpoilerTerms() {
 
 	// Delete the existing list
 	document.getElementById('spoiler-terms-list').innerHTML = ""
 	
 	// Populate the ul with spoiler terms list
-	spoilerTerms.slice().reverse().forEach( (item, index) => {		//TODO: More efficient solution: for-loop?
+	spoilerTerms.forEach( (item, index) => {
 
 		var listItem = document.createElement("li")
 
 		// Assign the spoiler text
 		const textSpan = document.createElement("span")
-		textSpan.textContent = item
+		textSpan.textContent = spoilerTerms[index]
 
 		// Add the text span to the li
 		listItem.appendChild(textSpan)
@@ -132,9 +117,14 @@ function populateWithSpoilerTerms() {
 }
 
 function deleteSpoilerTerm(index) {
+	
+	// Remove 1 spoiler term from index position
+	spoilerTerms.splice(index, 1)
 
-	alert(index)
-	//spoilerTerms
+	// Reset the storage array
+	chrome.storage.sync.set({'spoilerArray': spoilerTerms }, () => {
+		main()
+	})
 }
 
 deleteButton.addEventListener("click", () => {
@@ -144,6 +134,32 @@ deleteButton.addEventListener("click", () => {
 function clearAll() {
 	chrome.storage.sync.set({'spoilerArray': []})
 	spoilerTerms = []
+}
+
+function main() {
+	chrome.storage.sync.get(['spoilerArray'], (result) => {
+		// Nothing to change.
+		if (!result.spoilerArray) {
+			return
+		}
+
+		// Initialize spoilerTerms with existing spoiler terms
+		spoilerTerms = result.spoilerArray
+
+		// Populate HTML
+		populateWithSpoilerTerms()
+
+		if (spoilerTerms.length == 0) {
+			document.getElementById("no-spoiler-terms-fallback").style.display = "block"
+			document.getElementById("added-keywords-container").style.display = "none"
+		}
+
+		else {
+			document.getElementById("no-spoiler-terms-fallback").style.display = "none"
+			document.getElementById("added-keywords-container").style.display = "flex"
+		}
+
+	})		
 }
 
 document.addEventListener('DOMContentLoaded', function () {
