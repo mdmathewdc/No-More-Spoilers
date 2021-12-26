@@ -96,7 +96,7 @@ function populateWithSpoilerTerms() {
 	document.getElementById('spoiler-terms-list').innerHTML = ""
 	
 	// Populate the ul with spoiler terms list
-	spoilerTerms.slice().reverse().forEach(item => {		//TODO: More efficient solution: for-loop?
+	spoilerTerms.slice().reverse().forEach( (item, index) => {		//TODO: More efficient solution: for-loop?
 
 		var listItem = document.createElement("li")
 
@@ -114,9 +114,12 @@ function populateWithSpoilerTerms() {
 		const deleteIcon = document.createElement("i")
 		deleteIcon.className = "far fa-trash-alt remove-btn-icon"
 		deleteButton.appendChild(deleteIcon)
+		deleteButton.id = index
 
 		// Add a listener to delete spoiler terms
-		deleteButton.addEventListener("click", deleteSpoilerTerm)
+		deleteButton.addEventListener("click", () => {
+			deleteSpoilerTerm(index)
+		}) 
 		
 		// Append Delete button to li
 		listItem.appendChild(deleteButton)
@@ -128,9 +131,10 @@ function populateWithSpoilerTerms() {
 
 }
 
-function deleteSpoilerTerm(event) {
-	
-	alert("Deleted")
+function deleteSpoilerTerm(index) {
+
+	alert(index)
+	//spoilerTerms
 }
 
 deleteButton.addEventListener("click", () => {
