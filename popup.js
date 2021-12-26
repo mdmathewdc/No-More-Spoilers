@@ -68,7 +68,7 @@ function getSpoilerTerms() {
 			return
 
 		terms = result.spoilerArray;
-		alert(JSON.stringify(terms))
+		// alert(JSON.stringify(terms))
 		let parsedArray = JSON.parse(JSON.stringify(terms))
 		// alert(parsedArray.length)
 		})
@@ -96,11 +96,22 @@ function populateWithSpoilerTerms() {
 
 		var listItem = document.createElement("li")
 
-		// and give it some content
-		const newContent = document.createTextNode(item)
+		// Assign the spoiler text
+		const newText = document.createTextNode(item)
 
-		// add the text node to the newly created div
-		listItem.appendChild(newContent)
+		// Add the text to the li
+		listItem.appendChild(newText)
+
+		// Create a hyperlink button
+		const deleteButton = document.createElement("a")
+
+		// Create delete icon and append
+		const deleteIcon = document.createElement("i")
+		deleteIcon.className = "far fa-trash-alt"
+		deleteButton.appendChild(deleteIcon)
+		
+		// Append Delete button to li
+		listItem.appendChild(deleteButton)
 
 		document.getElementById("spoiler-terms-list")
 				.appendChild(listItem)
