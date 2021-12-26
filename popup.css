@@ -1,5 +1,5 @@
 body {
-  background: #d6e6f0;
+  background: #f5a5a5;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   margin-bottom: 0;
 }
@@ -43,6 +43,7 @@ nav a {
   width: 235px;
   margin-right: 5px;
   border-radius: 3px;
+  border-style: solid;
 }
 
 .button {
