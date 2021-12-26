@@ -2,7 +2,7 @@
 // let changeColor = document.getElementById("changeColor");
 let inputBox = document.getElementById("textbox")
 let addButton = document.getElementById("add-button")
-let deleteButton = document.getElementById("delete-button")
+// let deleteButton = document.getElementById("delete-button")
 var spoilerTerms = []
 var terms
 
@@ -127,9 +127,9 @@ function deleteSpoilerTerm(index) {
 	})
 }
 
-deleteButton.addEventListener("click", () => {
-	clearAll()
-})
+// deleteButton.addEventListener("click", () => {
+// 	clearAll()
+// })
 
 function clearAll() {
 	chrome.storage.sync.set({'spoilerArray': []})
@@ -148,7 +148,8 @@ function main() {
 
 		// Populate HTML
 		populateWithSpoilerTerms()
-
+		
+		// Display or not the the fallback text when no spoiler terms are added
 		if (spoilerTerms.length == 0) {
 			document.getElementById("no-spoiler-terms-fallback").style.display = "block"
 			document.getElementById("added-keywords-container").style.display = "none"

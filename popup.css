@@ -1,5 +1,5 @@
 body {
-  background: #d6f0e3;
+  background: #d6e6f0;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   margin-bottom: 0;
 }
@@ -79,7 +79,7 @@ nav a {
 .no-spoiler-terms-fallback {
   display: none;
   border-radius: 5px;
-  border: 2px solid #92c9db;
+  border: 2px solid #335e6d;
   background: rgb(242, 243, 240);
   width: 100%;
   text-align: center;
@@ -102,7 +102,7 @@ nav a {
   justify-content: space-between;
   padding: 0 10px;
   border-radius: 5px;
-  border: 2px solid #92c9db;
+  border: 2px solid #335e6d;
   background: rgb(242, 243, 240);
 }
 
