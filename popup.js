@@ -57,7 +57,8 @@ addButton.addEventListener("click", async () => {
 	// Empty the input box value
 	inputBox.value = ""
 
-	getSpoilerTerms()
+	// Repopulate the HTML list
+	main()
 
 })
 
@@ -90,35 +91,46 @@ function main() {
 }
 
 function populateWithSpoilerTerms() {
+
+	// Delete the existing list
+	document.getElementById('spoiler-terms-list').innerHTML = ""
 	
 	// Populate the ul with spoiler terms list
-	spoilerTerms.forEach(item => {
+	spoilerTerms.slice().reverse().forEach(item => {		//TODO: More efficient solution: for-loop?
 
 		var listItem = document.createElement("li")
 
 		// Assign the spoiler text
-		const newText = document.createTextNode(item)
+		const textSpan = document.createElement("span")
+		textSpan.textContent = item
 
-		// Add the text to the li
-		listItem.appendChild(newText)
+		// Add the text span to the li
+		listItem.appendChild(textSpan)
 
 		// Create a hyperlink button
 		const deleteButton = document.createElement("a")
 
 		// Create delete icon and append
 		const deleteIcon = document.createElement("i")
-		deleteIcon.className = "far fa-trash-alt"
+		deleteIcon.className = "far fa-trash-alt remove-btn-icon"
 		deleteButton.appendChild(deleteIcon)
+
+		// Add a listener to delete spoiler terms
+		deleteButton.addEventListener("click", deleteSpoilerTerm)
 		
 		// Append Delete button to li
 		listItem.appendChild(deleteButton)
 
 		document.getElementById("spoiler-terms-list")
 				.appendChild(listItem)
-		// alert(listItem.innerHTML)
 		
 	})
 
+}
+
+function deleteSpoilerTerm(event) {
+	
+	alert("Deleted")
 }
 
 deleteButton.addEventListener("click", () => {
