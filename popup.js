@@ -159,9 +159,13 @@ async function hideSpoilerTerms() {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
   // Execute the script i.e run the function
-  chrome.scripting.executeScript({
+  // chrome.scripting.executeScript({
+  //   target: { tabId: tab.id },
+  //   function: hideDomNodes,
+  // });
+	chrome.scripting.executeScript({
     target: { tabId: tab.id },
-    function: hideDomNodes,
+    files: ['content_script.js']
   });
 }
 

@@ -6,7 +6,20 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["storage", "activeTab", "scripting"],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "css": ["spoiler_style.css"],
+      "js": ["content_script.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "declarativeContent"
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -21,7 +34,5 @@
     "32": "/images/32.png",
     "48": "/images/48.png",
     "128": "/images/128.png"
-  },
-  "options_page": "options.html"
-
+  }
 }
