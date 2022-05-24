@@ -58,7 +58,7 @@ addButton.addEventListener("click", async () => {
 	inputBox.value = ""
 
 	// Repopulate the HTML list
-	main()
+	constructorFunction()
 
 })
 
@@ -123,7 +123,7 @@ function deleteSpoilerTerm(index) {
 
 	// Reset the storage array
 	chrome.storage.sync.set({'spoilerArray': spoilerTerms }, () => {
-		main()
+		constructorFunction()
 	})
 }
 
@@ -136,7 +136,7 @@ function clearAll() {
 	spoilerTerms = []
 }
 
-function main() {
+function constructorFunction() {
 	chrome.storage.sync.get(['spoilerArray'], (result) => {
 		// Nothing to change.
 		if (!result.spoilerArray) {
@@ -164,5 +164,5 @@ function main() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-	main()
+	constructorFunction();
 })
