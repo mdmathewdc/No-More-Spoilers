@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="popup.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="popup.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
-
     <header>
-        <nav>
-            <a href="#">No More Spoilers!</a>
-        </nav>
+      <nav>
+        <a href="#">No More Spoilers!</a>
+      </nav>
     </header>
 
     <div class="container">
+      <div class="button-container">
+        <input
+          type="text"
+          id="textbox"
+          placeholder="Enter Spoiler Keywords to block here..."
+        />
+        <button class="button" id="add-button" disabled>Add</button>
+      </div>
 
-        <div class="button-container">
-             <input type="text" id="textbox" placeholder="Enter Spoiler Keywords to block here..."/>
-             <button class="button" id="add-button" disabled>Add</button>
-        </div>
+      <!-- <button id="delete-button">Delete all</button> -->
 
-        <!-- <button id="delete-button">Delete all</button> -->
+      <div id="added-keywords-container" class="added-keywords-container">
+        <ul id="spoiler-terms-list"></ul>
+      </div>
 
-
-        <div id="added-keywords-container" class="added-keywords-container">
-          <ul id= "spoiler-terms-list">
-
-          </ul>
-        </div>
-
-        <div id="no-spoiler-terms-fallback" class="no-spoiler-terms-fallback">
-            <p>No Spoiler terms added!</p>
-        </div>
-
-        <!-- <button id="changeColor">Change</button> -->
+      <div id="no-spoiler-terms-fallback" class="no-spoiler-terms-fallback">
+        <p>No Spoiler terms added!</p>
+      </div>
     </div>
 
     <script src="popup.js"></script>

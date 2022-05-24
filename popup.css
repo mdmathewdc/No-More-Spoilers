@@ -1,6 +1,7 @@
 body {
   background: rgb(172 203 247);
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin-bottom: 0;
 }
 
@@ -29,7 +30,7 @@ nav a {
   text-align: left;
   padding: 7px;
   text-decoration: none;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 900;
 }
 
@@ -50,7 +51,7 @@ nav a {
   padding-top: 4px;
   display: inline-block;
   height: 15px;
-  background: #348AA7;
+  background: #348aa7;
   border: none;
   outline: none;
   color: white;
