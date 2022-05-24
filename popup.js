@@ -1,4 +1,3 @@
-// Initialize button with user's preferred color
 let inputBox = document.getElementById("textbox");
 let addButton = document.getElementById("add-button");
 // let deleteButton = document.getElementById("delete-button")
