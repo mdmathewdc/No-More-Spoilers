@@ -62,6 +62,7 @@ addButton.addEventListener("click", async () => {
 
 })
 
+// Don't need the below function for now
 function getSpoilerTerms() {
 	chrome.storage.sync.get(['spoilerArray'], (result) => {
 		// Nothing to change.
@@ -160,8 +161,26 @@ function constructorFunction() {
 			document.getElementById("added-keywords-container").style.display = "flex"
 		}
 
-	})		
+	})
+	// Call function to hide the DOM nodes with the text
+	hideSpoilerTerms();
 }
+
+async function hideSpoilerTerms() {
+		// Get the current active tab
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+		// Execute the script i.e run the function
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      function: hideDomNodes,
+    });
+}
+
+  function hideDomNodes() {
+      document.body.style.backgroundColor = 'red';
+
+  }
 
 document.addEventListener('DOMContentLoaded', function () {
 	constructorFunction();
