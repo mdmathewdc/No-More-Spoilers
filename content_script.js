@@ -1,31 +1,9 @@
-// const termToBlock = 'Maverick';
-
-// const matches = [];
-
-// for (const span of document.querySelectorAll('span')) {
-//   alert(span.textContent);
-//   if (span.textContent.includes(termToBlock)) {
-//     matches.push(span);
-//     alert(span.textContent);
-//     span.className += ' hide-spoiler';
-//   }
-// }
-
-
-
-////////////////////////
-
 let cachedTerms = [];
 const elementsWithTextContentToSearch = "a, p, h1, h2, h3, h4, h5, h6";
 const containerElements = "span, div, li, th, td, dt, dd";
 
-// Every time a page is loaded, check our spoil terms and block,
-// after making sure settings allow blocking on this page.
+// Every time a page is loaded, check our spoil terms and block
 chrome.storage.sync.get(["spoilerArray"], (result) => {
-  // Don't manipulate page if blocking is snoozed
-  // if (result.isSnoozeOn && !isSnoozeTimeUp(result.timeToUnsnooze)) {
-  //   return;
-  // }
   // Don't manipulate page if user hasn't entered any terms
   if (!result.spoilerArray) {
     return;
@@ -34,21 +12,13 @@ chrome.storage.sync.get(["spoilerArray"], (result) => {
   enableMutationObserver();
 
   cachedTerms = result.spoilerArray;
-  console.log('cachedTerms: ', cachedTerms);
+  console.log("cachedTerms: ", cachedTerms);
   blockSpoilerContent(document, result.spoilerArray, "[Spoiler Alert!]");
 });
 
-// This is a duplicate method. I don't know how to have utility scripts shared
-// by both the content script and the popup script.
-function isSnoozeTimeUp(timeToUnsnooze) {
-  const now = new Date();
-  const isPastSnoozeTime = now.getTime() > timeToUnsnooze;
-  return isPastSnoozeTime;
-}
-
 function blockSpoilerContent(rootNode, spoilerTerms, blockText) {
   // Search innerHTML elements first
-  let nodes = rootNode.querySelectorAll(elementsWithTextContentToSearch)
+  let nodes = rootNode.querySelectorAll(elementsWithTextContentToSearch);
   replacenodesWithMatchingText(nodes, spoilerTerms, blockText);
 
   // Now find any container elements that have just text inside them
@@ -65,8 +35,7 @@ function replacenodesWithMatchingText(nodes, spoilerTerms, replaceString) {
     for (const spoilerTerm of spoilerTerms) {
       if (compareForSpoiler(node, spoilerTerm)) {
         if (!node.parentNode || node.parentNode.nodeName === "BODY") {
-          // ignore top-most node in DOM to avoid stomping entire DOM
-          // see issue #16 for more info
+          // Ignore top-most node in DOM to avoid stomping entire DOM
           continue;
         }
         node.className += " hidden-spoiler";
@@ -94,10 +63,14 @@ function blurNearestChildrenImages(nodeToCheck) {
   do {
     nextParent = nextParent.parentNode;
     if (nextParent && nextParent.nodeName !== "BODY") {
-      childImages = nextParent.parentNode.querySelectorAll('img');
+      childImages = nextParent.parentNode.querySelectorAll("img");
     }
     iterationCount++;
-  } while (nextParent && childImages.length === 0 && iterationCount < maxIterations)
+  } while (
+    nextParent &&
+    childImages.length === 0 &&
+    iterationCount < maxIterations
+  );
 
   // Now blur all of those images found under the parent node
   if (childImages && childImages.length > 0) {
@@ -125,8 +98,10 @@ function applyBlurCSSToMatchingImages(nodes, spoilerTerms) {
   for (const node of nodes) {
     for (const spoilerTerm of spoilerTerms) {
       const regex = new RegExp(spoilerTerm, "i");
-      if (regex.test(node.title) || regex.test(node.alt ||
-        regex.test(node.src) || regex.test(node.name))) {
+      if (
+        regex.test(node.title) ||
+        regex.test(node.alt || regex.test(node.src) || regex.test(node.name))
+      ) {
         node.className += " blurred";
         node.parentNode.style.overflow = "hidden";
       }
@@ -136,23 +111,22 @@ function applyBlurCSSToMatchingImages(nodes, spoilerTerms) {
 
 function enableMutationObserver() {
   // Detecting changed content using Mutation Observers
-  //
   // https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver?redirectlocale=en-US&redirectslug=DOM%2FMutationObserver
   // https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/
   MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
   const observer = new MutationObserver((mutations, observer) => {
-    // fired when a mutation occurs
+    // Fired when a mutation occurs
     // console.log(mutations, observer);
     for (const mutation of mutations) {
       blockSpoilerContent(mutation.target, cachedTerms, "[Spoiler Alert!]");
     }
   });
 
-  // configuration of the observer:
-  const config = { attributes: true, subtree: true }
-  // turn on the observer...unfortunately we target the entire document
+  // Configuration of the observer:
+  const config = { attributes: true, subtree: true };
+  // Turn on the observer, unfortunately we target the entire document
   observer.observe(document, config);
-  // disconnecting likely won't work since we need to continuously watch
+  // Disconnecting likely won't work since we need to continuously watch
   // observer.disconnect();
 }

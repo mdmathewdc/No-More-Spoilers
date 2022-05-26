@@ -14,12 +14,7 @@
       "run_at": "document_end"
     }
   ],
-  "permissions": [
-    "storage",
-    "activeTab",
-    "scripting",
-    "declarativeContent"
-  ],
+  "permissions": ["storage", "activeTab", "scripting", "declarativeContent"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {

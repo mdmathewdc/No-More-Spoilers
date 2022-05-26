@@ -1,28 +1,7 @@
 let inputBox = document.getElementById("textbox");
 let addButton = document.getElementById("add-button");
-// let deleteButton = document.getElementById("delete-button")
 var spoilerTerms = [];
 var terms;
-
-// When the button is clicked, inject setPageBackgroundColor into current page
-
-// changeColor.addEventListener("click", async () => {
-//     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-//     chrome.scripting.executeScript({
-//       target: { tabId: tab.id },
-//       function: setPageBackgroundColor,
-//     });
-//   });
-
-// The body of this function will be executed as a content script inside the
-// current page
-
-//   function setPageBackgroundColor() {
-//     chrome.storage.sync.get("color", ({ color }) => {
-//       document.body.style.backgroundColor = color;
-//     });
-//   }
 
 // Remove disabled property from 'Add' button when text input box is not empty
 inputBox.addEventListener("input", () => {
@@ -56,7 +35,7 @@ addButton.addEventListener("click", async () => {
   constructorFunction();
 });
 
-// Don't need the below function for now
+// Don't need the below function for now - To display spoiler terms
 function getSpoilerTerms() {
   chrome.storage.sync.get(["spoilerArray"], (result) => {
     // Nothing to change.
@@ -115,15 +94,6 @@ function deleteSpoilerTerm(index) {
   });
 }
 
-// deleteButton.addEventListener("click", () => {
-// 	clearAll()
-// })
-
-// function clearAll() {
-//   chrome.storage.sync.set({ spoilerArray: [] });
-//   spoilerTerms = [];
-// }
-
 function constructorFunction() {
   chrome.storage.sync.get(["spoilerArray"], (result) => {
     // Nothing to change.
@@ -149,23 +119,6 @@ function constructorFunction() {
       document.getElementById("added-keywords-container").style.display =
         "flex";
     }
-  });
-  // Call function to hide the DOM nodes with the text
-  hideSpoilerTerms();
-}
-
-async function hideSpoilerTerms() {
-  // Get the current active tab
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-  // Execute the script i.e run the function
-  // chrome.scripting.executeScript({
-  //   target: { tabId: tab.id },
-  //   function: hideDomNodes,
-  // });
-	chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    files: ['content_script.js']
   });
 }
 
