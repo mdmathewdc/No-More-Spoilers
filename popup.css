@@ -45,12 +45,14 @@ nav a {
   margin-right: 5px;
   border-radius: 3px;
   border-style: double;
+  box-shadow: 0rem 0rem 0.4rem #7d7d7d;
+
 }
 
 .button {
-  padding-top: 4px;
+  padding-top: 5px;
   display: inline-block;
-  height: 15px;
+  height: 16px;
   background: #348aa7;
   border: none;
   outline: none;
@@ -104,7 +106,7 @@ nav a {
   justify-content: space-between;
   padding: 0 10px;
   border-radius: 5px;
-  border: 2px solid #335e6d;
+  border: 1px solid #69c5e;
   background: rgb(242, 243, 240);
 }
 
