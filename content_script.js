@@ -12,7 +12,6 @@ chrome.storage.sync.get(["spoilerArray"], (result) => {
   enableMutationObserver();
 
   cachedTerms = result.spoilerArray;
-  console.log("cachedTerms: ", cachedTerms);
   blockSpoilerContent(document, result.spoilerArray, "[Spoiler Alert!]");
 });
 
